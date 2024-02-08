@@ -5,7 +5,7 @@ import { connect } from 'cloudflare:sockets';
 // [Windows] Press "Win + R", input cmd and run:  Powershell -NoExit -Command "[guid]::NewGuid()"
 let userID = 'd342d11e-d424-4583-b36e-524ab1f0afa4';
 
-const proxyIPs = ['23.162.136.169', 'cdn.xn--b6gac.eu.org', 'cdn-all.xn--b6gac.eu.org', 'edgetunnel.anycast.eu.org'];
+const proxyIPs = ['176.97.77.32'];
 
 let proxyIP = proxyIPs[Math.floor(Math.random() * proxyIPs.length)];
 
@@ -689,7 +689,7 @@ async function handleUDPOutBound(webSocket, vlessResponseHeader, log) {
  * @returns {string}
  */
 function getVLESSConfig(userIDs, hostName) {
-	const commonUrlPart = `:443?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2048#${hostName}`;
+	const commonUrlPart = `:443?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=path%2Fcmccdn%2F%3Fed%3D2048#${hostName}`;
 	const separator = "---------------------------------------------------------------";
 	const hashSeparator = "################################################################";
 
@@ -816,7 +816,7 @@ function createVLESSSub(userID_Path, hostName) {
 		if (!hostName.includes('pages.dev')) {
 			// Iterate over all ports for http
 			portArray_http.forEach((port) => {
-				const commonUrlPart_http = `:${port}?encryption=none&security=none&fp=random&type=ws&host=${hostName}&path=%2F%3Fed%3D2048#${hostName}-HTTP-${port}`;
+				const commonUrlPart_http = `:${port}?encryption=none&security=none&fp=random&type=ws&host=${hostName}&path=path%2Fcmccdn%2F%3Fed%3D2048#${hostName}-HTTP-${port}`;
 				const vlessMainHttp = `vless://${userID}@${hostName}${commonUrlPart_http}`;
 
 				// For each proxy IP, generate a VLESS configuration and add to output
@@ -829,7 +829,7 @@ function createVLESSSub(userID_Path, hostName) {
 		}
 		// Iterate over all ports for https
 		portArray_https.forEach((port) => {
-			const commonUrlPart_https = `:${port}?encryption=none&security=tls&sni=${hostName}&fp=random&type=ws&host=${hostName}&path=%2F%3Fed%3D2048#${hostName}-HTTPS-${port}`;
+			const commonUrlPart_https = `:${port}?encryption=none&security=tls&sni=${hostName}&fp=random&type=ws&host=${hostName}&path=path%2Fcmccdn%2F%3Fed%3D2048#${hostName}-HTTPS-${port}`;
 			const vlessMainHttps = `vless://${userID}@${hostName}${commonUrlPart_https}`;
 
 			// For each proxy IP, generate a VLESS configuration and add to output
